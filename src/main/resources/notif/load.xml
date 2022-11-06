@@ -1,0 +1,9 @@
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>Downloading your weekly playlist...</text>
+            <progress id="progressBar" title="Le chargement" value="0.2" valueStringOverride="bonjour"
+                      status="On attend..."/>
+        </binding>
+    </visual>
+</toast>
