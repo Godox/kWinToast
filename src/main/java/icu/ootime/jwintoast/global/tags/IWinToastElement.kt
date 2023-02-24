@@ -1,7 +1,9 @@
 package icu.ootime.jwintoast.global.tags
 
-abstract class IWinToastElement {
+interface IWinToastElement {
 
-    var id : String = ""
+    val tag: String
+
+    val id : String
 
 }

@@ -1,0 +1,19 @@
+<toast launch="alarmLaucnhArg" scenario="alarm">
+    <visual>
+        <binding template="ToastGeneric">
+            <text>Good morning!</text>
+            <text>7 + 15 = ?</text>
+        </binding>
+    </visual>
+    <actions>
+        <input id="answer" type="selection" defaultInput="wrongDefault">
+            <selection id="wrong" content="19" />
+            <selection id="wrongDefault" content="23" />
+            <selection id="wrong" content="21" />
+            <selection id="right" content="22" />
+            <selection id="wrong" content="24" />
+        </input>
+        <action activationType="system" arguments="snooze" content="" />
+        <action activationType="background" arguments="dismiss" content="Dismiss" />
+    </actions>
+</toast>

@@ -3,29 +3,34 @@ package icu.ootime.jwintoast.global
 import icu.ootime.jwintoast.HString
 import icu.ootime.jwintoast.HStringMap
 import icu.ootime.jwintoast.NotificationManager.winToast
+import icu.ootime.jwintoast.global.tags.IWinToastElement
 import org.bytedeco.javacpp.CharPointer
 import org.bytedeco.javacpp.IntPointer
-import kotlin.properties.Delegates
-import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 class PointerBinding<T : Any> {
 
-    var id: String = ""
+    lateinit var id: String
 
-    val pointer: CharPointer by lazy { CharPointer(id) }
+    private lateinit var value: T
 
-    internal lateinit var value: T
+    private val charPointer by lazy { CharPointer(id) }
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
+    operator fun getValue(thisRef: IWinToastElement, property: KProperty<*>): T {
         return value
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        winToast.update(HStringMap().apply {
-            put(HString(pointer), HString(CharPointer(value.toString())))
-        }, IntPointer(0))
-        this.value = value
+    operator fun setValue(thisRef: IWinToastElement, property: KProperty<*>, value: T) {
+        HStringMap().apply {
+            put(HString(charPointer), HString(CharPointer(value.toString())))
+            winToast.update(this, IntPointer(0))
+        }
+        initValue(value)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    internal fun initValue(value: Any) {
+        this.value = value as T
     }
 
 }

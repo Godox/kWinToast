@@ -16,9 +16,9 @@ class WinToast : Pointer() {
 
     @Cast("uint32_t")
     external fun showToast(
-        @Const @ByRef winToastTemplate: WinToastTemplate?,
-        iWinToastHandler: IWinToastHandler?,
-        @Cast("WinToastLib::WinToast::WinToastError *") erro: IntPointer?
+        @Const @ByRef winToastTemplate: WinToastTemplate,
+        iWinToastHandler: IWinToastHandler,
+        @Cast("WinToastLib::WinToast::WinToastError *") erro: IntPointer
     ): Int
 
     //    public native void notifier2(@Cast("bool *") boolean sessed,@ByRef HString hString);
